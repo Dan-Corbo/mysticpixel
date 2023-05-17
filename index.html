@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es-UY">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script src="https://kit.fontawesome.com/c6b04e4465.js" crossorigin="anonymous"></script>
+    <link rel="icon" href="/imagenes/Perfil.png" type="icon"/>
+    <link rel="stylesheet" href="/css/style.css"/>
+    <script src="https://kit.fontawesome.com/c6b04e4465.js" crossorigin="anonymous"></script>
+    <script src="/js/reloj.js"></script>
+    <script src="/js/clima.js"></script>
+    <title>Mystic Pixel</title>
+</head>
+<body>
+        <header>
+            <h1 id="titulo" class="animado">
+                <span>Mystic Pixel</span>
+            </h1>
+            <h3 id="reloj"></h3>
+        </header>
+        <div id="container">
+            <div id="clima">
+                <h4 id="clima-actual">Cargando...</h4>
+            </div>
+                <h2 id="radio">Azul FM</h2>
+            <div id="audio">
+                <audio controls>
+                    <source src="https://azul-2.nty.uy" type="audio/mpeg">
+                </audio>
+            </div>
+        </div>
+        <script>
+                // Obtiene el elemento HTML donde se mostrará la hora actual
+                const horaActualElemento = document.getElementById("reloj");
+            
+                // Muestra la hora actual en el elemento HTML cada segundo
+                setInterval(() => {
+                horaActualElemento.innerText = horaActual.obtenerHora();
+            }, 1000);
+        </script>
+<footer>
+    <p>Autor: Daniel Corbo</p>
+    <p>Derechos Reservados ©</p>
+    <p>Mis Redes Sociales:</p>
+    <a href="https://twitter.com/dan_corbo225" target="_blank"><i class="fa-brands fa-square-twitter"></i> Twitter</a>
+    <br>
+    <a href="https://www.instagram.com/dan_corbo225/" target="_blank"><i class="fa-brands fa-square-instagram"></i> Instagram</a>
+</footer>
+</body>
+</html>

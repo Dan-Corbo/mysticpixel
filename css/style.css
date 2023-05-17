@@ -1,0 +1,198 @@
+
+/* Estilo del body */
+body {
+    background-color: #000000;
+}
+
+header {
+    text-align: center;
+    color: #0ec27a;
+}
+
+.animado {
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear; /* Establece una animación de velocidad constante */
+    text-align: center;
+}
+
+.animado span {
+    animation: fade-in-out 4s linear infinite;
+}
+
+@keyframes fade-in-out {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Estilo del contenedor principal */
+#container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+    background-image: url("https://images.pexels.com/photos/1563355/pexels-photo-1563355.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
+    color: #333333;
+    font-family: Arial, sans-serif;
+}
+
+  /* Estilo del widget de clima */
+#clima {
+    color: #0ec27a;
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    padding: 20px;
+    background-color: #000000b0;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+  /* Estilo de los íconos en el widget de clima */
+#clima i {
+    font-size: 90px;
+    margin-bottom: 10px;
+}
+
+  /* Estilo de los textos en el widget de clima */
+#clima p {
+    margin: 5px 0;
+}
+
+#clima .izquierda,
+.derecha {
+    flex: 1;
+}
+
+#clima .arriba {
+    text-align: center;
+    font-weight: bolder;
+}
+
+#clima .derecha {
+    margin-top: 20px;
+    font-weight: bolder;
+}
+
+#clima .temperatura {
+    font-size: large;
+    font-weight: bolder;
+}
+
+#clima .info {
+    text-align: left;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#clima .descripcion {
+    text-align: left;
+    font-size: large;
+    font-weight: bolder;
+}
+
+
+#clima .abajo {
+    display: flex;
+}
+
+  /* Estilo del reloj */
+#reloj {
+    color: #0ec27a;
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Estilo de la etiqueta de la radio */
+
+#radio {
+    width: 200px;
+    border-radius: 10px;
+    text-align: center;
+    background-color: #000000b0;
+    color: #0ec27a;
+}
+
+  /* Estilo de la etiqueta de audio */
+#audio {
+    background-color: transparent;
+    width: 300px;
+    margin-bottom: 20px;
+}
+
+  /* Estilo de los botones de reproducción de audio */
+#audio button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #333333;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#audio button:hover {
+    background-color: #0ec27a;
+}
+
+footer {
+    background-color: #000000b0;
+    text-align: center;
+    color: #0ec27a;
+}
+
+/* Media Queries para hacer el diseño responsive */
+@media (max-width: 600px) {
+    #clima {
+        width: 90%; /* Cambia el ancho a ocupar el 100% del contenedor */
+        font-size: small; /* Reduce el tamaño de fuente para dispositivos más pequeños */
+    }
+
+    #clima .info {
+        font-size: small; /* Reduce el tamaño de fuente para dispositivos más pequeños */
+        font-weight: bolder;
+    }
+
+    #clima .arriba {
+        font-size: small; /* Reduce el tamaño de fuente para dispositivos más pequeños */
+        font-weight: bolder;
+    }
+
+    #clima i {
+        font-size: 60px; /* Reduce el tamaño del ícono para dispositivos más pequeños */
+    }
+}
+
+a {
+    /* Estilos generales para los enlaces */
+    color: #ffffff; 
+    text-decoration: none; 
+}
+
+a:hover {
+    /* Estilos cuando el enlace está en estado "hover" (al pasar el cursor sobre él) */
+    text-decoration: underline;
+}
+
+a:visited {
+    /* Estilos para los enlaces visitados */
+    color: #9c0000;
+}
+
+a:active {
+    /* Estilos para los enlaces en estado "active" (al hacer clic sobre ellos) */
+    color: #2cbc00;
+}
