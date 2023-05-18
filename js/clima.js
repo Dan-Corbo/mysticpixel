@@ -39,7 +39,7 @@ const climaWidget = (function() {
                     const temperatura = Math.floor(data.main.temp);
                     const sensacionTermica = Math.floor(data.main.feels_like);
                     const humedad = Math.floor(data.main.humidity);
-                    const viento = data.wind.speed;
+                    const viento = Math.floor(data.wind.speed);
                     const main = data.weather[0].main;
 
                     const climaWidget = document.getElementById("clima");
