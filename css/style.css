@@ -205,11 +205,13 @@ footer {
     }
 
     #clima i {
-        font-size: 78px; /* Reduce el tamaño del ícono para dispositivos más pequeños */
+        font-size: 75px; /* Reduce el tamaño del ícono para dispositivos más pequeños */
+        margin-left: 10px;
     }
 
     #clima .descripcion {
         width: 110px;
+        margin-left: 5px;
         font-size: medium; /* Reduce el tamaño de fuente para dispositivos más pequeños */
         font-weight: bolder;
     }
