@@ -21,7 +21,3 @@ const horaActual = (function() {
         obtenerHora: obtenerHora
     }
 })();
-
-    // Ejemplo de uso:
-        console.log(horaActual.obtenerHora()); 
-        // Imprime la hora actual en formato de 24 horas con segundos en la consola
