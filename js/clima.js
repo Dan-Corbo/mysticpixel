@@ -53,12 +53,15 @@ const climaWidget = (function() {
                             descripcion_esp = "Cielo despejado";
                             break;
                         case "Clouds":
-                            if (description.includes("few")) {
+                            if (main.includes("few")) {
                                 icono = "fa-solid fa-cloud-sun";
                                 descripcion_esp = "Algunas nubes";
-                            } else if (description.includes("scattered")) {
+                            } else if (main.includes("scattered")) {
                                 icono = "fa-solid fa-cloud-sun";
                                 descripcion_esp = "Nubes dispersas";
+                            } else if (main.includes("overcast")) {
+                                icono = "fa-solid fa-cloud";
+                                descripcion_esp = "Cielo nublado";
                             } else {
                                 icono = "fa-solid fa-cloud";
                                 descripcion_esp = "Nublado";
@@ -69,15 +72,21 @@ const climaWidget = (function() {
                             descripcion_esp = "Llovizna";
                             break;
                         case "Rain":
-                            if (description.includes("light")) {
+                            if (main.includes("light")) {
                                 icono = "fa-solid fa-cloud-rain";
                                 descripcion_esp = "Lluvia ligera";
-                            } else if (description.includes("heavy")) {
+                            } else if (main.includes("moderate")) {
+                                icono = "fa-solid fa-cloud-showers-heavy";
+                                descripcion_esp = "Lluvia moderada";
+                            } else if (main.includes("heavy")) {
                                 icono = "fa-solid fa-cloud-showers-heavy";
                                 descripcion_esp = "Lluvia intensa";
+                            } else if (main.includes("very heavy")) {
+                                icono = "fa-solid fa-cloud-showers-heavy";
+                                descripcion_esp = "Lluvia muy intensa";
                             } else {
                                 icono = "fa-solid fa-cloud-rain";
-                                descripcion_esp = "Lluvia moderada";
+                                descripcion_esp = "Lluvia";
                             }
                             break;
                         case "Thunderstorm":
@@ -85,10 +94,13 @@ const climaWidget = (function() {
                             descripcion_esp = "Tormenta eléctrica";
                             break;
                         case "Snow":
-                            if (description.includes("light")) {
+                            if (main.includes("light")) {
                                 icono = "fa-solid fa-snowflake";
                                 descripcion_esp = "Nieve ligera";
-                            } else if (description.includes("heavy")) {
+                            } else if (main.includes("moderate")) {
+                                icono = "fa-solid fa-snowflake";
+                                descripcion_esp = "Nieve moderada";
+                            } else if (main.includes("heavy")) {
                                 icono = "fa-solid fa-snowflake";
                                 descripcion_esp = "Nieve intensa";
                             } else {
@@ -113,13 +125,8 @@ const climaWidget = (function() {
                             descripcion_esp = "Polvo en suspensión";
                             break;
                         case "Fog":
-                            if (description.includes("dense")) {
-                                icono = "fa-solid fa-smog";
-                                descripcion_esp = "Niebla espesa";
-                            } else {
-                                icono = "fa-solid fa-smog";
-                                descripcion_esp = "Niebla";
-                            }
+                            icono = "fa-solid fa-smog";
+                            descripcion_esp = "Niebla";
                             break;
                         case "Sand":
                             icono = "fa-solid fa-wind";
@@ -131,7 +138,7 @@ const climaWidget = (function() {
                             break;
                         case "Squall":
                             icono = "fa-solid fa-wind";
-                            descripcion_esp = "Chubasco fuerte";
+                            descripcion_esp = "Chubasco";
                             break;
                         case "Tornado":
                             icono = "fa-solid fa-wind";
@@ -140,6 +147,7 @@ const climaWidget = (function() {
                         default:
                             icono = "fa-solid fa-question";
                             descripcion_esp = "Desconocido";
+                            break;
                     }
 
                     const vientoKmh = convertirVelocidad(viento); // Convierte la velocidad del viento a km/h
