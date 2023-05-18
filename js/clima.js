@@ -16,7 +16,7 @@ const climaWidget = (function() {
 
     // Define una función para convertir la velocidad del viento de m/s a km/h
     function convertirVelocidad(viento) {
-        return Math.round(viento * 3.6); // Multiplica por 3.6 para convertir de m/s a km/h
+        return (viento * 3.6).toFixed(1); // Multiplica por 3.6 para convertir de m/s a km/h
     }
 
     // Define una función interna para obtener la fecha actual en formato "día de mes de año y pone la primera letra del dia de la semana en mayuscula"
@@ -53,8 +53,8 @@ const climaWidget = (function() {
                             descripcion_esp = "Cielo despejado";
                             break;
                         case "Clouds":
-                            icono = "fa-solid fa-cloud-bolt";
-                            descripcion_esp = "Nublado";
+                            icono = "fa-solid fa-cloud-sun";
+                            descripcion_esp = "Parcialmente nublado";
                             break;
                         case "Drizzle":
                             icono = "fa-solid fa-cloud-rain";
