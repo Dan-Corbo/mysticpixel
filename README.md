@@ -1,3 +1,3 @@
-# mysticpixel
+# Mystic Pixel
 
 -blog personal-
