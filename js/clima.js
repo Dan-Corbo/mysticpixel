@@ -53,42 +53,89 @@ const climaWidget = (function() {
                             descripcion_esp = "Cielo despejado";
                             break;
                         case "Clouds":
-                            icono = "fa-solid fa-cloud-sun";
-                            descripcion_esp = "Parcialmente nublado";
+                            if (description.includes("few")) {
+                                icono = "fa-solid fa-cloud-sun";
+                                descripcion_esp = "Algunas nubes";
+                            } else if (description.includes("scattered")) {
+                                icono = "fa-solid fa-cloud-sun";
+                                descripcion_esp = "Nubes dispersas";
+                            } else {
+                                icono = "fa-solid fa-cloud";
+                                descripcion_esp = "Nublado";
+                            }
                             break;
                         case "Drizzle":
                             icono = "fa-solid fa-cloud-rain";
                             descripcion_esp = "Llovizna";
                             break;
                         case "Rain":
-                            icono = "fa-solid fa-cloud-showers-heavy";
-                            descripcion_esp = "Lluvia moderada";
+                            if (description.includes("light")) {
+                                icono = "fa-solid fa-cloud-rain";
+                                descripcion_esp = "Lluvia ligera";
+                            } else if (description.includes("heavy")) {
+                                icono = "fa-solid fa-cloud-showers-heavy";
+                                descripcion_esp = "Lluvia intensa";
+                            } else {
+                                icono = "fa-solid fa-cloud-rain";
+                                descripcion_esp = "Lluvia moderada";
+                            }
                             break;
                         case "Thunderstorm":
                             icono = "fa-solid fa-bolt";
                             descripcion_esp = "Tormenta eléctrica";
                             break;
                         case "Snow":
-                            icono = "fa-solid fa-snowflake";
-                            descripcion_esp = "Nieve";
+                            if (description.includes("light")) {
+                                icono = "fa-solid fa-snowflake";
+                                descripcion_esp = "Nieve ligera";
+                            } else if (description.includes("heavy")) {
+                                icono = "fa-solid fa-snowflake";
+                                descripcion_esp = "Nieve intensa";
+                            } else {
+                                icono = "fa-solid fa-snowflake";
+                                descripcion_esp = "Nieve";
+                            }
                             break;
                         case "Mist":
+                            icono = "fa-solid fa-smog";
+                            descripcion_esp = "Niebla";
+                            break;
                         case "Smoke":
+                            icono = "fa-solid fa-smog";
+                            descripcion_esp = "Humo";
+                            break;
                         case "Haze":
-                        case "Dust":
-                        case "Fog":
                             icono = "fa-solid fa-smog";
                             descripcion_esp = "Neblina";
                             break;
+                        case "Dust":
+                            icono = "fa-solid fa-smog";
+                            descripcion_esp = "Polvo en suspensión";
+                            break;
+                        case "Fog":
+                            if (description.includes("dense")) {
+                                icono = "fa-solid fa-smog";
+                                descripcion_esp = "Niebla espesa";
+                            } else {
+                                icono = "fa-solid fa-smog";
+                                descripcion_esp = "Niebla";
+                            }
+                            break;
                         case "Sand":
-                        case "Ash":
                             icono = "fa-solid fa-wind";
                             descripcion_esp = "Tormenta de arena";
                             break;
+                        case "Ash":
+                            icono = "fa-solid fa-wind";
+                            descripcion_esp = "Ceniza volcánica";
+                            break;
                         case "Squall":
+                            icono = "fa-solid fa-wind";
+                            descripcion_esp = "Chubasco fuerte";
+                            break;
                         case "Tornado":
                             icono = "fa-solid fa-wind";
-                            descripcion_esp = "Chubasco";
+                            descripcion_esp = "Tornado";
                             break;
                         default:
                             icono = "fa-solid fa-question";
