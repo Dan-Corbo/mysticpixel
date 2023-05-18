@@ -62,7 +62,7 @@ const climaWidget = (function() {
                             break;
                         case "Rain":
                             icono = "fa-solid fa-cloud-showers-heavy";
-                            descripcion_esp = "Lluvia";
+                            descripcion_esp = "Lluvia moderada";
                             break;
                         case "Thunderstorm":
                             icono = "fa-solid fa-bolt";
