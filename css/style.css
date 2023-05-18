@@ -123,7 +123,7 @@ input::placeholder {
 
 #clima .descripcion {
     margin-left: 20px;
-    text-align: center;
+    text-align: left;
     font-size: large;
     font-weight: bolder;
 }
