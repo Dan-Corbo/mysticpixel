@@ -31,6 +31,10 @@ header {
     }
 }
 
+
+    
+
+
 /* Estilo del contenedor principal */
 #container {
     display: flex;
@@ -140,7 +144,11 @@ input::placeholder {
 
   /* Estilo del reloj */
 #reloj {
+    background-color: #000000b0;
     color: #0ec27a;
+    border-radius: 10px;
+    text-align: center;
+
     font-size: 30px;
     font-weight: bold;
     margin-bottom: 20px;
