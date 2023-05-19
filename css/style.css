@@ -31,10 +31,6 @@ header {
     }
 }
 
-
-    
-
-
 /* Estilo del contenedor principal */
 #container {
     display: flex;
@@ -145,13 +141,12 @@ input::placeholder {
   /* Estilo del reloj */
 #reloj {
     background-color: #000000b0;
+    padding: 10px;
     color: #0ec27a;
-    border-radius: 10px;
+    border-radius: 20px;
     text-align: center;
-
     font-size: 30px;
     font-weight: bold;
-    margin-bottom: 20px;
 }
 
 /* Estilo de la etiqueta de la radio */
