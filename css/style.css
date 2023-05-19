@@ -141,6 +141,7 @@ input::placeholder {
   /* Estilo del reloj */
 #reloj {
     background-color: #000000b0;
+    margin-top: 0;
     padding: 10px;
     color: #0ec27a;
     border-radius: 20px;
