@@ -9,10 +9,11 @@ header {
 }
 
 .animado {
-    animation-duration: 5s;
+    animation-duration: 20s;
     animation-iteration-count: infinite;
     animation-timing-function: linear; /* Establece una animación de velocidad constante */
     text-align: center;
+    margin: 5;
 }
 
 .animado span {
@@ -38,6 +39,7 @@ header {
     align-items: center;
     justify-content: center;
     height: 100vh;
+    padding: 10px;
     background-color: #f0f0f0;
     background-image: url("https://images.pexels.com/photos/1563355/pexels-photo-1563355.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
     color: #333333;
@@ -136,14 +138,44 @@ input::placeholder {
 
 #clima .abajo {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#clima .abajo .pronostico {
+    display: flex;
+    justify-content: center;
+    padding-right: 20px;
+    margin-top: 10px;
+}
+
+#clima .abajo .dia {
+    flex-basis: 30%;
+    text-align: center;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+#clima .abajo .dia .nombre-dia {
+    font-weight: bold;
+}
+
+#clima .abajo .dia i {
+    font-size: 16px;
+}  
+
+#clima .abajo .dia .temperatura {
+    font-size: 18px;
+}
+
+#clima .abajo .dia .descripcion {
+    font-size: 12px;
 }
 
   /* Estilo del reloj */
 #reloj {
-    background-color: #000000b0;
-    margin-top: 0;
-    padding: 10px;
     color: #0ec27a;
+    margin: 10px;
     border-radius: 20px;
     text-align: center;
     font-size: 30px;
@@ -155,6 +187,7 @@ input::placeholder {
 #radio {
     width: 200px;
     border-radius: 10px;
+    padding: 5px;
     text-align: center;
     background-color: #000000b0;
     color: #0ec27a;
@@ -164,7 +197,6 @@ input::placeholder {
 #audio {
     background-color: transparent;
     width: 300px;
-    margin-bottom: 20px;
 }
 
   /* Estilo de los botones de reproducción de audio */
