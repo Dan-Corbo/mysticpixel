@@ -1,197 +1,283 @@
-// Define un módulo de JavaScript para obtener el clima actual de una ciudad a través de OpenWeatherMap
-const climaWidget = (function() {
+// Define una función interna para obtener la fecha actual en formato "Día de Mes de Año y pone la primera letra del día de la semana en mayúscula"
+function obtenerFecha() {
+    const fecha = new Date();
+    const opciones = {
+        weekday: "long",
+        month: "long",
+        day: "numeric",
+        year: "numeric",
+        localeMatcher: "best fit",
+    };
+    const fechaString = fecha.toLocaleDateString("es-UY", opciones);
+    const primeraLetraMayuscula = fechaString.charAt(0).toUpperCase();
+    const diaDeLaSemana = primeraLetraMayuscula + fechaString.slice(1);
+    return diaDeLaSemana;
+}
+
+  // Obtener el clima actual de una ciudad
+const obtenerClima = async (ciudad, unidad) => {
     const API_KEY = "63da5e52930472d1a9cca33fdc8207af"; // Reemplaza "TU_CLAVE_DE_API" con tu clave de API de OpenWeatherMap
-
-    // Define una función interna para obtener el clima actual de una ciudad a través de su nombre
-    async function obtenerClima(ciudad, unidad) {
-        const URL = `https://api.openweathermap.org/data/2.5/weather?q=${ciudad}&units=${unidad}&appid=${API_KEY}`;
-
-        try {
-            const response = await fetch(URL);
-            return await response.json();
-        } catch (error) {
-            return console.error(error);
+    try {
+    const response = await fetch(
+        `https://api.openweathermap.org/data/2.5/weather?q=${ciudad}&units=${unidad}&appid=${API_KEY}`
+    );
+    if (response.ok) {
+        const data = await response.json();
+        return data;
+    } else {
+        throw new Error("Error al obtener el clima");
         }
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+};
+
+  // Obtener el pronóstico de varios días para una ciudad
+const obtenerPronostico = async (ciudad, unidad) => {
+    const API_KEY = "63da5e52930472d1a9cca33fdc8207af"; // Reemplaza "TU_CLAVE_DE_API" con tu clave de API de OpenWeatherMap
+    try {
+    const response = await fetch(
+        `https://api.openweathermap.org/data/2.5/forecast?q=${ciudad}&units=${unidad}&appid=${API_KEY}`
+    );
+        if (response.ok) {
+        const data = await response.json();
+        return data;
+        } else {
+        throw new Error("Error al obtener el pronóstico");
+        }
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+};
+
+function obtenerIconoClima(descripcion) {
+    let icono = "";
+    let descripcionEsp = "";
+
+    switch (descripcion) {
+        case "Clear":
+            icono = "fas fa-sun";
+            descripcionEsp = "Despejado";
+            break;
+        case "Clouds":
+            icono = "fas fa-cloud";
+            descripcionEsp = "Nublado";
+            break;
+        case "Rain":
+            icono = "fas fa-cloud-showers-heavy";
+            descripcionEsp = "Lluvia";
+            break;
+        case "Drizzle":
+            icono = "fas fa-cloud-rain";
+            descripcionEsp = "Llovizna";
+            break;
+        case "Thunderstorm":
+            icono = "fas fa-bolt";
+            descripcionEsp = "Tormenta";
+            break;
+        case "Snow":
+            icono = "fas fa-snowflake";
+            descripcionEsp = "Nieve";
+            break;
+        case "Mist":
+            icono = "fas fa-smog";
+            descripcionEsp = "Neblina";
+            break;
+        case "Smoke":
+            icono = "fas fa-smog";
+            descripcionEsp = "Humo";
+            break;
+        case "Haze":
+            icono = "fas fa-smog";
+            descripcionEsp = "Neblina";
+            break;
+        case "Dust":
+            icono = "fas fa-smog";
+            descripcionEsp = "Polvo";
+            break;
+        case "Fog":
+            icono = "fas fa-smog";
+            descripcionEsp = "Niebla";
+            break;
+        case "Sand":
+            icono = "fas fa-smog";
+            descripcionEsp = "Arena";
+            break;
+        case "Ash":
+            icono = "fas fa-smog";
+            descripcionEsp = "Ceniza volcánica";
+            break;
+        case "Squall":
+            icono = "fas fa-wind";
+            descripcionEsp = "Chubasco";
+            break;
+        case "Tornado":
+            icono = "fas fa-wind";
+            descripcionEsp = "Tornado";
+            break;
+        case "Squalls":
+            icono = "fas fa-wind";
+            descripcionEsp = "Chubascos";
+            break;
+        case "Tornadoes":
+            icono = "fas fa-wind";
+            descripcionEsp = "Tornados";
+            break;
+        case "Dust whirls":
+            icono = "fas fa-wind";
+            descripcionEsp = "Remolinos de polvo";
+            break;
+        case "Sandstorm":
+            icono = "fas fa-wind";
+            descripcionEsp = "Tormenta de arena";
+            break;
+        case "Volcanic ash":
+            icono = "fas fa-wind";
+            descripcionEsp = "Ceniza volcánica";
+            break;
+        case "Squall line":
+            icono = "fas fa-wind";
+            descripcionEsp = "Línea de chubascos";
+            break;
+        case "Funnel cloud":
+            icono = "fas fa-wind";
+            descripcionEsp = "Nube embudo";
+            break;
+        case "Dust storm":
+            icono = "fas fa-wind";
+            descripcionEsp = "Tormenta de polvo";
+            break;
+        case "Freezing rain":
+            icono = "fas fa-cloud-showers-heavy";
+            descripcionEsp = "Lluvia congelante";
+            break;
+        default:
+            icono = "fas fa-question";
+            descripcionEsp = "Desconocido";
+            break;
     }
 
-    // Define una función para convertir la velocidad del viento de m/s a km/h
-    function convertirVelocidad(viento) {
-        return (viento * 3.6).toFixed(1); // Multiplica por 3.6 para convertir de m/s a km/h
-    }
+    return { icono, descripcionEsp };
+}
 
-    // Define una función interna para obtener la fecha actual en formato "día de mes de año y pone la primera letra del dia de la semana en mayuscula"
-    function obtenerFecha() {
-        const fecha = new Date();
-        const opciones = { weekday: "long", month: "long", day: "numeric", year: "numeric", localeMatcher: "best fit" };
-        const fechaString = fecha.toLocaleDateString("es-UY", opciones);
-        const primeraLetraMayuscula = fechaString.charAt(0).toUpperCase();
-        const diaDeLaSemana = primeraLetraMayuscula + fechaString.slice(1);
-        return diaDeLaSemana;
-    }
+// Define una función para convertir la velocidad del viento de m/s a km/h
+function convertirVelocidad(viento) {
+    return (viento * 3.6).toFixed(1); // Multiplica por 3.6 para convertir de m/s a km/h
+}
 
-    // Devuelve un objeto con la función para actualizar el widget con el clima actual de una ciudad específica
+// Widget de clima
+const climaWidget = (() => {
+    const climaWidget = document.getElementById("clima");
+
     return {
-        actualizarWidget: function(ciudad) {
-            const unidad = "metric";
+        actualizarWidget: async (ciudad, unidad) => {
+            try {
+                const clima = await obtenerClima(ciudad, unidad);
 
-            obtenerClima(ciudad, unidad)
-                .then(data => {
-                    const temperatura = Math.floor(data.main.temp);
-                    const sensacionTermica = Math.floor(data.main.feels_like);
-                    const humedad = Math.floor(data.main.humidity);
-                    const viento = data.wind.speed;
-                    const main = data.weather[0].main;
+                if (clima) {
+                    const temperatura = Math.floor(clima.main.temp);
+                    const descripcion = clima.weather[0].description;
+                    const { icono, descripcionEsp } = obtenerIconoClima(clima.weather[0].main);
 
-                    const climaWidget = document.getElementById("clima");
+                    const sensacionTermica = Math.floor(clima.main.feels_like);
+                    const humedad = clima.main.humidity;
+                    const viento = clima.wind.speed;
 
-                    let icono;
-                    let descripcion_esp;
+                    const vientoKmh = convertirVelocidad(viento);
 
-                    switch (main) {
-                        case "Clear":
-                            icono = "fa-solid fa-sun";
-                            descripcion_esp = "Cielo despejado";
-                            break;
-                        case "Clouds":
-                            if (main.includes("few")) {
-                                icono = "fa-solid fa-cloud-sun";
-                                descripcion_esp = "Algunas nubes";
-                            } else if (main.includes("scattered")) {
-                                icono = "fa-solid fa-cloud-sun";
-                                descripcion_esp = "Nubes dispersas";
-                            } else if (main.includes("overcast")) {
-                                icono = "fa-solid fa-cloud";
-                                descripcion_esp = "Cielo nublado";
-                            } else {
-                                icono = "fa-solid fa-cloud";
-                                descripcion_esp = "Nublado";
-                            }
-                            break;
-                        case "Drizzle":
-                            icono = "fa-solid fa-cloud-rain";
-                            descripcion_esp = "Llovizna";
-                            break;
-                        case "Rain":
-                            if (main.includes("light")) {
-                                icono = "fa-solid fa-cloud-rain";
-                                descripcion_esp = "Lluvia ligera";
-                            } else if (main.includes("moderate")) {
-                                icono = "fa-solid fa-cloud-showers-heavy";
-                                descripcion_esp = "Lluvia moderada";
-                            } else if (main.includes("heavy")) {
-                                icono = "fa-solid fa-cloud-showers-heavy";
-                                descripcion_esp = "Lluvia intensa";
-                            } else if (main.includes("very heavy")) {
-                                icono = "fa-solid fa-cloud-showers-heavy";
-                                descripcion_esp = "Lluvia muy intensa";
-                            } else {
-                                icono = "fa-solid fa-cloud-rain";
-                                descripcion_esp = "Lluvia";
-                            }
-                            break;
-                        case "Thunderstorm":
-                            icono = "fa-solid fa-bolt";
-                            descripcion_esp = "Tormenta eléctrica";
-                            break;
-                        case "Snow":
-                            if (main.includes("light")) {
-                                icono = "fa-solid fa-snowflake";
-                                descripcion_esp = "Nieve ligera";
-                            } else if (main.includes("moderate")) {
-                                icono = "fa-solid fa-snowflake";
-                                descripcion_esp = "Nieve moderada";
-                            } else if (main.includes("heavy")) {
-                                icono = "fa-solid fa-snowflake";
-                                descripcion_esp = "Nieve intensa";
-                            } else {
-                                icono = "fa-solid fa-snowflake";
-                                descripcion_esp = "Nieve";
-                            }
-                            break;
-                        case "Mist":
-                            icono = "fa-solid fa-smog";
-                            descripcion_esp = "Niebla";
-                            break;
-                        case "Smoke":
-                            icono = "fa-solid fa-smog";
-                            descripcion_esp = "Humo";
-                            break;
-                        case "Haze":
-                            icono = "fa-solid fa-smog";
-                            descripcion_esp = "Neblina";
-                            break;
-                        case "Dust":
-                            icono = "fa-solid fa-smog";
-                            descripcion_esp = "Polvo en suspensión";
-                            break;
-                        case "Fog":
-                            icono = "fa-solid fa-smog";
-                            descripcion_esp = "Niebla";
-                            break;
-                        case "Sand":
-                            icono = "fa-solid fa-wind";
-                            descripcion_esp = "Tormenta de arena";
-                            break;
-                        case "Ash":
-                            icono = "fa-solid fa-wind";
-                            descripcion_esp = "Ceniza volcánica";
-                            break;
-                        case "Squall":
-                            icono = "fa-solid fa-wind";
-                            descripcion_esp = "Chubasco";
-                            break;
-                        case "Tornado":
-                            icono = "fa-solid fa-wind";
-                            descripcion_esp = "Tornado";
-                            break;
-                        default:
-                            icono = "fa-solid fa-question";
-                            descripcion_esp = "Desconocido";
-                            break;
+                    const pais = clima.sys.country;
+                    const ciudadCapitalizada =
+                        ciudad.charAt(0).toUpperCase() + ciudad.slice(1);
+                    const ubicacion = `${ciudadCapitalizada}, ${pais}`;
+
+                    const pronostico = await obtenerPronostico(ciudad, unidad);
+
+                    if (pronostico) {
+                        const pronosticoDia1 = pronostico.list[0];
+                        const pronosticoDia2 = pronostico.list[8];
+                        const pronosticoDia3 = pronostico.list[16];
+
+                        const temperaturaDia1 = Math.floor(pronosticoDia1.main.temp);
+                        const descripcionDia1 = pronosticoDia1.weather[0].description;
+                        const { icono: iconoDia1, descripcionEsp: descripcionEspDia1 } = obtenerIconoClima(pronosticoDia1.weather[0].main);
+
+                        const temperaturaDia2 = Math.floor(pronosticoDia2.main.temp);
+                        const descripcionDia2 = pronosticoDia2.weather[0].description;
+                        const { icono: iconoDia2, descripcionEsp: descripcionEspDia2 } = obtenerIconoClima(pronosticoDia2.weather[0].main);
+
+                        const temperaturaDia3 = Math.floor(pronosticoDia3.main.temp);
+                        const descripcionDia3 = pronosticoDia3.weather[0].description;
+                        const { icono: iconoDia3, descripcionEsp: descripcionEspDia3 } = obtenerIconoClima(pronosticoDia3.weather[0].main);
+
+                        climaWidget.innerHTML = `
+                            <div class="arriba">
+                                <p class="fecha">${obtenerFecha()}</p>
+                                <p class="ciudad">${ubicacion}</p>
+                            </div>
+                            <div class="abajo">
+                                <div class="izquierda">
+                                    <p class="temperatura"><i class="${icono}"></i> ${temperatura}&#8451;</p>
+                                    <p class="descripcion">${descripcionEsp}</p>
+                                </div>
+                                <div class="derecha">
+                                    <p class="info">Sensación térmica: ${sensacionTermica}&#8451;</p>
+                                    <p class="info">Humedad: ${humedad} %</p>
+                                    <p class="info">Velocidad del viento: ${vientoKmh} km/h</p>
+                                </div>
+                                <div class="pronostico">
+                                    <div class="dia">
+                                        <p class="nombre-dia">${obtenerNombreDia(pronosticoDia1.dt_txt)}</p>
+                                        <p class="temperatura"><i class="${iconoDia1}"></i> ${temperaturaDia1}&#8451;</p>
+                                        <p class="descripcion">${descripcionEspDia1}</p>
+                                    </div>
+                                    <div class="dia">
+                                        <p class="nombre-dia">${obtenerNombreDia(pronosticoDia2.dt_txt)}</p>
+                                        <p class="temperatura"><i class="${iconoDia2}"></i> ${temperaturaDia2}&#8451;</p>
+                                        <p class="descripcion">${descripcionEspDia2}</p>
+                                    </div>
+                                    <div class="dia">
+                                        <p class="nombre-dia">${obtenerNombreDia(pronosticoDia3.dt_txt)}</p>
+                                        <p class="temperatura"><i class="${iconoDia3}"></i> ${temperaturaDia3}&#8451;</p>
+                                        <p class="descripcion">${descripcionEspDia3}</p>
+                                    </div>
+                                </div>
+                            </div>`;
+                    } else {
+                        climaWidget.innerHTML = "No se pudo obtener el pronóstico.";
                     }
-
-                    const vientoKmh = convertirVelocidad(viento); // Convierte la velocidad del viento a km/h
-
-                    const pais = data.sys.country;
-
-                    const ciudadCapitalizada = ciudad.charAt(0).toUpperCase() + ciudad.slice(1);
-                    const ubicacion = `${ciudadCapitalizada}, ${pais}`; // Concatenar ciudad y país
-
-                    climaWidget.innerHTML = `
-                        <div class="arriba">
-                            <p class="fecha">${obtenerFecha()}</p>
-                            <p class="ciudad">${ubicacion}</p> <!-- Mostrar ubicación (ciudad y país) -->
-                        </div>
-                        <div class="abajo">
-                            <div class="izquierda">
-                                <p class="temperatura"><i class="${icono}"></i> ${temperatura}&#8451;</p>
-                                <p class="descripcion">${descripcion_esp}</p>
-                            </div>
-                            <div class="derecha">
-                                <p class="info">Sensación térmica: ${sensacionTermica}&#8451;</p>
-                                <p class="info">Humedad: ${humedad} %</p>
-                                <p class="info">Velocidad del viento: ${vientoKmh} km/h</p>
-                            </div>
-                        </div>`;
-                })
-                .catch(error => console.error(error));
-        }
+                } else {
+                    climaWidget.innerHTML = "No se pudo obtener el clima.";
+                }
+            } catch (error) {
+                climaWidget.innerHTML = "Error al obtener el clima.";
+            }
+        },
     };
 })();
 
-// Función para actualizar el widget al hacer clic en el botón o al presionar Enter
+  // Función para obtener el nombre del día a partir de una fecha
+function obtenerNombreDia(fecha) {
+    const diasSemana = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+    const fechaObjeto = new Date(fecha);
+    const indiceDiaSemana = fechaObjeto.getDay();
+    return diasSemana[indiceDiaSemana];
+}
+
+  // Función para actualizar el widget al hacer clic en el botón o al presionar Enter
 function actualizarWidgetPorBusqueda() {
     const ciudadInput = document.getElementById("ciudadInput");
     const ciudad = ciudadInput.value;
-    climaWidget.actualizarWidget(ciudad);
+    climaWidget.actualizarWidget(ciudad, "metric");
 }
 
-const ciudadInput = document.getElementById("ciudadInput");
-const buscarButton = document.getElementById("buscarButton");
+    const ciudadInput = document.getElementById("ciudadInput");
+    const buscarButton = document.getElementById("buscarButton");
 
-buscarButton.addEventListener("click", actualizarWidgetPorBusqueda);
+    buscarButton.addEventListener("click", actualizarWidgetPorBusqueda);
 
-ciudadInput.addEventListener("keydown", function(event) {
+    ciudadInput.addEventListener("keydown", function (event) {
     if (event.key === "Enter") {
         actualizarWidgetPorBusqueda();
     }
