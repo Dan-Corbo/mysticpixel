@@ -228,12 +228,12 @@ const climaWidget = (() => {
                                 </div>
                                 <div class="pronostico">
                                     <div class="dia">
-                                        <p class="nombre-dia">Hoy ${(pronosticoDia1.dt_txt)}</p>
+                                        <p class="nombre-dia">Hoy</p>
                                         <p class="temperatura"><i class="${iconoDia1}"></i> ${temperaturaDia1}&#8451;</p>
                                         <p class="descripcion">${descripcionEspDia1}</p>
                                     </div>
                                     <div class="dia">
-                                        <p class="nombre-dia">Mañana ${(pronosticoDia2.dt_txt)}</p>
+                                        <p class="nombre-dia">Mañana</p>
                                         <p class="temperatura"><i class="${iconoDia2}"></i> ${temperaturaDia2}&#8451;</p>
                                         <p class="descripcion">${descripcionEspDia2}</p>
                                     </div>
