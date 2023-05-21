@@ -59,19 +59,77 @@ function obtenerIconoClima(descripcion) {
     switch (descripcion) {
         case "Clear":
             icono = "fas fa-sun";
-            descripcionEsp = "Despejado";
+            descripcionEsp = "Cielo despejado";
+            }
             break;
         case "Clouds":
             icono = "fas fa-cloud";
             descripcionEsp = "Nublado";
+
+            if (descripcion.includes("few clouds")) {
+                icono = "fas fa-cloud-sun";
+                descripcionEsp = "Parcialmente nublado";
+            } else if (descripcion.includes("scattered clouds")) {
+                icono = "fas fa-cloud-sun";
+                descripcionEsp = "Nubes dispersas";
+            } else if (descripcion.includes("broken clouds")) {
+                icono = "fas fa-cloud";
+                descripcionEsp = "Nublado con nubes dispersas";
+            }
             break;
         case "Rain":
             icono = "fas fa-cloud-showers-heavy";
             descripcionEsp = "Lluvia";
+
+            if (descripcion.includes("light rain")) {
+                icono = "fas fa-cloud-rain";
+                descripcionEsp = "Lluvia ligera";
+            } else if (descripcion.includes("moderate rain")) {
+                icono = "fas fa-cloud-rain";
+                descripcionEsp = "Lluvia moderada";
+            } else if (descripcion.includes("heavy intensity rain")) {
+                icono = "fas fa-cloud-showers-heavy";
+                descripcionEsp = "Lluvia fuerte";
+            } else if (descripcion.includes("very heavy rain")) {
+                icono = "fas fa-cloud-showers-heavy";
+                descripcionEsp = "Lluvia muy fuerte";
+            } else if (descripcion.includes("extreme rain")) {
+                icono = "fas fa-cloud-showers-heavy";
+                descripcionEsp = "Lluvia extrema";
+            }
             break;
         case "Drizzle":
             icono = "fas fa-cloud-rain";
             descripcionEsp = "Llovizna";
+
+            if (descripcion.includes("light intensity drizzle")) {
+                icono = "fas fa-cloud-rain";
+                descripcionEsp = "Llovizna ligera";
+            } else if (descripcion.includes("drizzle")) {
+                icono = "fas fa-cloud-rain";
+                descripcionEsp = "Llovizna";
+            } else if (descripcion.includes("heavy intensity drizzle")) {
+                icono = "fas fa-cloud-showers-heavy";
+                descripcionEsp = "Llovizna intensa";
+            } else if (descripcion.includes("light intensity drizzle rain")) {
+                icono = "fas fa-cloud-rain";
+                descripcionEsp = "Llovizna con lluvia ligera";
+            } else if (descripcion.includes("drizzle rain")) {
+                icono = "fas fa-cloud-rain";
+                descripcionEsp = "Llovizna con lluvia";
+            } else if (descripcion.includes("heavy intensity drizzle rain")) {
+                icono = "fas fa-cloud-showers-heavy";
+                descripcionEsp = "Llovizna intensa con lluvia";
+            } else if (descripcion.includes("shower rain and drizzle")) {
+                icono = "fas fa-cloud-showers-heavy";
+                descripcionEsp = "Lluvia intensa y llovizna";
+            } else if (descripcion.includes("heavy shower rain and drizzle")) {
+                icono = "fas fa-cloud-showers-heavy";
+                descripcionEsp = "Lluvia intensa y llovizna";
+            } else if (descripcion.includes("shower drizzle")) {
+                icono = "fas fa-cloud-rain";
+                descripcionEsp = "Llovizna intensa";
+            }
             break;
         case "Thunderstorm":
             icono = "fas fa-bolt";
@@ -80,6 +138,41 @@ function obtenerIconoClima(descripcion) {
         case "Snow":
             icono = "fas fa-snowflake";
             descripcionEsp = "Nieve";
+
+            if (descripcion.includes("light snow")) {
+                icono = "fas fa-snowflake";
+                descripcionEsp = "Nieve ligera";
+            } else if (descripcion.includes("moderate snow")) {
+                icono = "fas fa-snowflake";
+                descripcionEsp = "Nieve moderada";
+            } else if (descripcion.includes("heavy snow")) {
+                icono = "fas fa-snowflake";
+                descripcionEsp = "Nieve fuerte";
+            } else if (descripcion.includes("sleet")) {
+                icono = "fas fa-snowflake";
+                descripcionEsp = "Aguanieve";
+            } else if (descripcion.includes("light shower sleet")) {
+                icono = "fas fa-snowflake";
+                descripcionEsp = "Aguanieve ligera";
+            } else if (descripcion.includes("shower sleet")) {
+                icono = "fas fa-snowflake";
+                descripcionEsp = "Aguanieve";
+            } else if (descripcion.includes("light rain and snow")) {
+                icono = "fas fa-cloud-rain";
+                descripcionEsp = "Lluvia ligera y nieve";
+            } else if (descripcion.includes("rain and snow")) {
+                icono = "fas fa-cloud-rain";
+                descripcionEsp = "Lluvia y nieve";
+            } else if (descripcion.includes("light shower snow")) {
+                icono = "fas fa-snowflake";
+                descripcionEsp = "Nieve ligera";
+            } else if (descripcion.includes("shower snow")) {
+                icono = "fas fa-snowflake";
+                descripcionEsp = "Nieve";
+            } else if (descripcion.includes("heavy shower snow")) {
+                icono = "fas fa-snowflake";
+                descripcionEsp = "Nieve intensa";
+            }
             break;
         case "Mist":
             icono = "fas fa-smog";
