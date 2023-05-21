@@ -60,7 +60,6 @@ function obtenerIconoClima(descripcion) {
         case "Clear":
             icono = "fas fa-sun";
             descripcionEsp = "Cielo despejado";
-            }
             break;
         case "Clouds":
             icono = "fas fa-cloud";
